@@ -1,4 +1,7 @@
 import random
+import dbm
+import pickle
+import os
 
 # CLASSES
 class Person:
@@ -64,9 +67,12 @@ class Game:
 
     deck_folder = []
 
-    def __init__(self, mc):
-        self.mc = mc
-        self.deck = self.create_deck()
+    def __init__(self, mc, db):
+        # self.mc = mc
+        # self.deck = self.create_deck()
+        self.mc = pickle.loads(db["main character"]) if b"main character" in db else mc
+        Game.deck_folder = pickle.loads(db["decks"]) if b"decks" in db else []
+        self.deck = Game.deck_folder[0] if len(Game.deck_folder) >= 1 else self.create_deck()
     
     def get_prompt(self):
         request = input("> Command: ")
@@ -133,8 +139,14 @@ class Game:
             team2.attack(team1, scale)
 
     def save_data(self):
-        # fout = open("savefile.txt", "w")
-        return
+        db = dbm.open("savefile1.txt", "c")
+        decks = pickle.dumps(self.deck_folder)
+        mc = pickle.dumps(self.mc)
+        db["decks"] = decks
+        db["main character"] = mc
+        print("Saving file... Success!")
+        db.close()
+
     
     
     
@@ -163,6 +175,9 @@ class Game:
                 opp = Opponent("%s's opponent" % self.mc.name)
                 self.battle(self.mc, opp)
             
+            if request == 's':
+                self.save_data()
+            
             
             
             
@@ -170,13 +185,15 @@ class Game:
 
 # MAIN GAME LOOP
 you = Person()
-game_1 = Game(you)
+db = dbm.open("savefile1.txt", "c")
+# decks = pickle.dumps([0, 1, 2])
+# mc = pickle.dumps([3, 4, 5, 6, 7])
+# db["decks"] = decks
+# db["main character"] = mc
+
+# for keys in db.keys():
+#     print(keys, type(keys))
+
+game_1 = Game(you, db)
+db.close()
 game_1.run()
-
-"""
-Data to save:
-- fout = open('output.txt', 'w')
-- deck_folder
-- you 
-
-"""
