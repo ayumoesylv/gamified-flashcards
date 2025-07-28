@@ -3,7 +3,7 @@ import random
 # CLASSES
 class Person:
     """creates a person object that can engage in battle"""
-    def __init__(self, name = "default_char", health = 100, level = 1):
+    def __init__(self, name = "default_char", health = 70, level = 1):
         self.name = name
         self.health = health
         self.level = level
@@ -11,8 +11,8 @@ class Person:
     def __str__(self):
         return self.name
 
-    def attack(self, other):
-        amt = self.level * 10
+    def attack(self, other, scale):
+        amt = self.level * (7 + scale)
         other.health -= amt
         print("%s took %d damage! %d health remains!" % (other.name, amt, other.health))
 
@@ -22,11 +22,6 @@ class Person:
 
 class Opponent(Person): 
     """creates an opponent object, which inherits from person, that the player does not control in battle"""
-    def attack(self, other):
-        scale = random.randint(7, 10)
-        amt = self.level * scale
-        other.health -= amt
-        print("%s took %d damage! %d health remains!" % (other.name, amt, other.health))
 
 
 class Deck:
@@ -90,6 +85,10 @@ class Game:
     def add_to_deck(self):
         self.deck.add_cards()
     
+    def update_character(self):
+        self.mc.name = input("> Enter new name: ")
+        print("Thanks, my new name is %s!" % self.mc.name)
+    
     def battle(self, team1, team2):
         """prepares for battle
         
@@ -126,14 +125,13 @@ class Game:
             if b_request == 'a':
                 print("Attacking %s!\n" % team2.name)
                 self.deck.pull_card()
-                scale = self.deck.rate()
-                team1.attack(team2)
+                scale = self.deck.rate_card()
+                team1.attack(team2, scale)
 
-            team2.attack(team1)
+            scale = random.randint(0, 3)
+            team2.attack(team1, scale)
 
-    def update_character(self):
-        self.mc.name = input("> Enter new name: ")
-        print("Thanks, my new name is %s!" % self.mc.name)
+    
     
     
     
@@ -153,13 +151,15 @@ class Game:
             
             if request == 'ad':
                 self.add_to_deck()
+            
+            if request == 'uc':
+                self.update_character()
 
             if request == 'b':
                 opp = Opponent("%s's opponent" % self.mc.name)
                 self.battle(self.mc, opp)
             
-            if request == 'uc':
-                self.update_character()
+            
             
             
 
