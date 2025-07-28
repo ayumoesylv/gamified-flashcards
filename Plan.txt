@@ -1,0 +1,112 @@
+HI!
+
+The following is a rough plan I have for this program, which will gamify my flashcard experience.
+
+Functionality specifications:
+- Allow user to input their flashcards and store this information permanently 
+- Allow user to edit, add, delete their flashcards
+- Allow user to go through their flashcards at random and see the back or front of the card 
+- Allow user to rate their own memory of a card after viewing the card 
+- Allow user to fight enemies to gain loot 
+- Allow user to choose skill to use 
+- Allow user to choose when to quit the application
+
+
+Main objects
+- Game:
+    Attributes:
+        main character
+    Methods:
+        Get user prompt
+
+- Person: 
+    Attributes:
+        name, inventory, equipped items, skills, health, turn, level, attack power, money 
+    Methods:
+        
+        Get skill description
+        Announce stats 
+        Choose skill 
+        Attack
+        Start a battle 
+        die 
+        End a battle
+        Read deck 
+        consume item 
+        Update inventory
+        Update equipped items 
+        Update health
+        update level
+
+
+    Children
+        - Swordsperson (close range atk)
+        - Archer (far range atk)
+        - Healer (Healer)
+            Special methods:
+                Choose team member 
+        - Opposition 
+
+
+- Item: 
+    Attributes:
+        power ups, 
+    Methods:
+        Get owned
+        get equipped 
+        Use 
+
+    Children
+        - weapon 
+        - Clothing 
+        - Perishable 
+
+- Inventory:
+    Attributes:
+        inventory list
+    Methods:
+        Update inventory
+    Children   
+        Equipped items
+
+
+- Deck: 
+    Attributes:
+        Card dictionary 
+
+    Methods:
+        add card
+        delete card
+        edit card 
+        rate card 
+
+- Folder:
+    Attributes:
+        Deck list
+    
+    Methods: 
+
+Typical battle sequence:
+
+- Choose appropriate decks 
+- Loop while true until user types exit, user dies, or enemy dies 
+- Check stats to see if loop ends 
+- user types fight
+- randomly assign enemy 
+- Announce stats
+- Check for turn 
+- Choose skill (if enemy, just attack)
+- Shuffle deck 
+- Get card from deck 
+- Display card front 
+- Ask user to type in answer
+- Reveal back on request 
+- promt a rating 
+- take a rating and calculate damage 
+- transfer turn to enemy 
+
+
+Typical non battle sequence:
+
+- Prompt user to take action
+- Update and announce changes 
