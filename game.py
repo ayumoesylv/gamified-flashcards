@@ -59,7 +59,8 @@ class Game:
             'sm': 'show menu', 
             'b': 'start battle', 
             'uc': "update character",
-            'ad': 'add to deck'}
+            'ad': 'add to deck',
+            's': 'save data'}
 
     deck_folder = []
 
@@ -131,6 +132,9 @@ class Game:
             scale = random.randint(0, 3)
             team2.attack(team1, scale)
 
+    def save_data(self):
+        # fout = open("savefile.txt", "w")
+        return
     
     
     
@@ -168,3 +172,11 @@ class Game:
 you = Person()
 game_1 = Game(you)
 game_1.run()
+
+"""
+Data to save:
+- fout = open('output.txt', 'w')
+- deck_folder
+- you 
+
+"""
