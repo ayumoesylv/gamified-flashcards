@@ -10,7 +10,7 @@ class Person:
     
     def __str__(self):
         return self.name
-    
+
     def attack(self, other):
         amt = self.level * 10
         other.health -= amt
@@ -49,6 +49,10 @@ class Deck:
         print("-------\nENTERING CARD...ANSWER TO ATTACK: \n")
         answer = input("> Type the correct value to this card: %s\n> " % key)
         print("The correct answer is: %s. Your answer was %s." % (self.card_list[key], answer))
+    
+    def rate_card(self):
+        rating = input("> How did you do? \n0 = fail, \n1 = hard, \n2 = okay, \n3 = easy\n> ")
+        return int(rating)
     
     
 
@@ -122,6 +126,7 @@ class Game:
             if b_request == 'a':
                 print("Attacking %s!\n" % team2.name)
                 self.deck.pull_card()
+                scale = self.deck.rate()
                 team1.attack(team2)
 
             team2.attack(team1)
