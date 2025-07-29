@@ -1,5 +1,33 @@
 HI!
 
+Recent feedback and reflection compilation: 
+
+    Current challenges:
+        __hash__ and __eq__ as concepts
+        Whether it is good practice to use my custom class as a dictionary key
+    
+    Current goals / functionality specifications left to implement: 
+        Allow user to edit, add, delete their flashcards
+        Allow user to fight enemies to gain loot
+        Allow user to choose skill to use
+
+    feedback   
+        No exception handling yet
+            Learn try, catch, and throw
+        Structure  
+            A lot of function logic mixed with data, which will make it harder to swap out data storage options in future
+            Try to create an intermediate layer between game and data storage (interafce) 
+            Model view control paradigm
+        Generalize I/O
+            What if you want to change the display from just being printed?
+            Game engine assumes I/O is from the command line, but it could change to a webpage, or voice
+        Pytest library to do testing of your code - python test framework
+        Change the .txt extension to .pickle or something
+
+
+
+
+_______
 The following is a rough plan I have for this program, which will gamify my flashcard experience.
 
 Functionality specifications:
