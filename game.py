@@ -1,7 +1,6 @@
 import random
 import dbm
 import pickle
-import os
 
 # CLASSES
 class Person:
@@ -10,6 +9,8 @@ class Person:
         self.name = name
         self.health = health
         self.level = level
+        self.inventory = Inventory()
+        self.equipped = Inventory()
     
     def __str__(self):
         return self.name
@@ -21,11 +22,39 @@ class Person:
 
     def give_in(self):
         print("I yield!")
+    
+    def give_item(self, item):
+        return
+    
+    def receive_item(self, item):
+        self.inventory[item] += self.inventory.get(item, 0)
+        return
+    
+    def equip_item(self):
+        return
+    
+    def unequip_item(self):
+        return
+    
+
 
 
 class Opponent(Person): 
     """creates an opponent object, which inherits from person, that the player does not control in battle"""
 
+class Item:
+    def __init__(self, name = "junk", hp = 0, is_perishable = False):
+        self.name = name
+        self.hp = hp
+        self.is_perishable = is_perishable
+    
+    def use():
+        return
+
+class Inventory: 
+    def __init__(self):
+        self.register = {}
+        
 
 class Deck:
     """creates a deck with flashcards to review"""
@@ -147,8 +176,6 @@ class Game:
         print("Saving file... Success!")
         db.close()
 
-    
-    
     
     
     def run(self):
