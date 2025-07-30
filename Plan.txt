@@ -24,6 +24,12 @@ Recent feedback and reflection compilation:
         Pytest library to do testing of your code - python test framework
         Change the .txt extension to .pickle or something
 
+    Sources of feedback in the future
+        Dad
+        Teachers, peers, profs
+        ICS CS? 
+        Cornell discord? 
+
 
 
 

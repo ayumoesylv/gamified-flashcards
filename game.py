@@ -9,8 +9,8 @@ class Person:
         self.name = name
         self.health = health
         self.level = level
-        self.inventory = Inventory()
-        self.equipped = Inventory()
+        self.inventory = {}
+        self.equipped = {}
     
     def __str__(self):
         return self.name
@@ -43,18 +43,20 @@ class Opponent(Person):
     """creates an opponent object, which inherits from person, that the player does not control in battle"""
 
 class Item:
-    def __init__(self, name = "junk", hp = 0, is_perishable = False):
+    def __init__(self, name = "junk", level = 1, hp = 0, is_perishable = False):
         self.name = name
+        self.level = level
         self.hp = hp
         self.is_perishable = is_perishable
     
     def use():
         return
-
-class Inventory: 
-    def __init__(self):
-        self.register = {}
-        
+    
+    def __eq__(self, other):
+        return self.name == other.name and self.level == other.level
+    
+    def __hash__(self):
+        return hash((self.name, self.level))
 
 class Deck:
     """creates a deck with flashcards to review"""
