@@ -66,11 +66,20 @@ class Deck:
     
     def __str__(self):
         # return self.name
-        return self.card_list
+        srep = ''
+        for i in self.card_list.keys():
+            srep += "%s\n" % (i)
+        return srep
     
-    def add_cards(self):
+    def set_card(self):
         front = input("> Enter front: ")
         back = input("\n> Enter back: ")
+        return (front, back)
+
+    def add_cards(self, info: tuple):
+        # front = input("> Enter front: ")
+        # back = input("\n> Enter back: ")
+        front, back = self.set_card()
         print("Card successfully added.")
         self.card_list[front] = back
     
@@ -82,6 +91,9 @@ class Deck:
         except KeyError:
             print("Card not in %s. Try command prompt list deck cards to see all cards in %s" % (self.name, self.name))
     
+    def edit_cards(self):
+        new_value = input("> Enter new back: ")
+
     def pull_card(self):
         key = random.choice(list(self.card_list.keys()))
         print("-------\nENTERING CARD...ANSWER TO ATTACK: \n")
@@ -103,6 +115,7 @@ class Game:
             'b': 'start battle', 
             'uc': "update character",
             'ud': 'update deck',
+            'ld': 'list deck cards',
             's': 'save data'}
 
     deck_folder = []
@@ -135,6 +148,9 @@ class Game:
             self.deck.add_cards()
         elif action == 'd':
             self.deck.delete_cards()
+    
+    def list_deck(self):
+        print(self.deck)
     
     def update_character(self):
         self.mc.name = input("> Enter new name: ")
@@ -209,6 +225,9 @@ class Game:
             
             if request == 'ud':
                 self.update_deck()
+            
+            if request == 'ld':
+                self.list_deck()
             
             if request == 'uc':
                 self.update_character()
