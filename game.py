@@ -65,13 +65,22 @@ class Deck:
         self.name = name
     
     def __str__(self):
-        return self.name
+        # return self.name
+        return self.card_list
     
     def add_cards(self):
         front = input("> Enter front: ")
         back = input("\n> Enter back: ")
         print("Card successfully added.")
         self.card_list[front] = back
+    
+    def delete_cards(self):
+        """deletes a card a user specifies by key name"""
+        key = input("> Specify card: ")
+        try:
+            self.card_list.pop(key)
+        except KeyError:
+            print("Card not in %s. Try command prompt list deck cards to see all cards in %s" % (self.name, self.name))
     
     def pull_card(self):
         key = random.choice(list(self.card_list.keys()))
@@ -93,7 +102,7 @@ class Game:
             'sm': 'show menu', 
             'b': 'start battle', 
             'uc': "update character",
-            'ad': 'add to deck',
+            'ud': 'update deck',
             's': 'save data'}
 
     deck_folder = []
@@ -120,8 +129,12 @@ class Game:
         Game.deck_folder.append(new_deck)
         return Game.deck_folder[0]
 
-    def add_to_deck(self):
-        self.deck.add_cards()
+    def update_deck(self):
+        action = input("> Type a to add a card and d to delete a card: ")
+        if action == 'a':
+            self.deck.add_cards()
+        elif action == 'd':
+            self.deck.delete_cards()
     
     def update_character(self):
         self.mc.name = input("> Enter new name: ")
@@ -194,8 +207,8 @@ class Game:
             if request == 'cd':
                 self.create_deck()
             
-            if request == 'ad':
-                self.add_to_deck()
+            if request == 'ud':
+                self.update_deck()
             
             if request == 'uc':
                 self.update_character()
