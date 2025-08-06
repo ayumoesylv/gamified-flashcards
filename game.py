@@ -76,7 +76,7 @@ class Deck:
         back = input("\n> Enter back: ")
         return (front, back)
 
-    def add_cards(self, info: tuple):
+    def add_cards(self):
         # front = input("> Enter front: ")
         # back = input("\n> Enter back: ")
         front, back = self.set_card()
@@ -92,8 +92,9 @@ class Deck:
             print("Card not in %s. Try command prompt list deck cards to see all cards in %s" % (self.name, self.name))
     
     def edit_cards(self):
-        new_value = input("> Enter new back: ")
-
+        self.delete_cards()
+        self.add_cards()
+    
     def pull_card(self):
         key = random.choice(list(self.card_list.keys()))
         print("-------\nENTERING CARD...ANSWER TO ATTACK: \n")
@@ -143,11 +144,13 @@ class Game:
         return Game.deck_folder[0]
 
     def update_deck(self):
-        action = input("> Type a to add a card and d to delete a card: ")
+        action = input("> Type a to add a card, d to delete a card, and e to edit a card: ")
         if action == 'a':
             self.deck.add_cards()
         elif action == 'd':
             self.deck.delete_cards()
+        elif action == 'e':
+            self.deck.edit_cards()
     
     def list_deck(self):
         print(self.deck)
