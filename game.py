@@ -41,6 +41,23 @@ class Person:
 
 class Opponent(Person): 
     """creates an opponent object, which inherits from person, that the player does not control in battle"""
+    lootitems = ["junk", "coins", "weapon", "food"]
+
+    def __init__(self, name = "default_char", health = 70, level = 1):
+        self.name = name
+        self.health = health
+        self.level = level
+        self.inventory = {}
+        for i in range(len(Opponent.lootitems)):
+            amt = random.randint(0, 3)
+            self.inventory[i] = amt
+
+    def drop_loot(self):
+        """Randomly picks items from inventory to drop."""
+        for i in self.inventory:
+
+        return 
+    
 
 class Item:
     def __init__(self, name = "junk", level = 1, hp = 0, is_perishable = False):
